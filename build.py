@@ -6,6 +6,12 @@ CYRMaintenance (001961:BSHeartland.esm) as None. SetupChildClothing() then fails
 array" and the three child outfits are never registered with the adoption script. This plugin overrides that one quest and
 binds the arrays to the boy and girl MISC items of the same colour as each outfit in `childClothing` (same order).
 
+The same quest record also never sets CYRMaintenanceScript.CYRAyleidUndeadFriendFaction, although the faction exists
+(CYRAyleidUndeadFriendFaction, 0B555D:BSHeartland.esm). SetupFactionRelationships() then calls
+BSKRatFaction.SetAlly(None, ...), which logs "Cannot be an ally of a None faction" and drops that alliance. The plugin adds
+the property. CYRCrowsWoodWorld and CYRTestWorld (no worldspace record) and CYRLeyawiinRepublicGold001 (no record; the script
+tests it for None) are left unset on purpose.
+
 Usage: python3 build.py          dry run: serializes inputs/BSHeartland.esm, prints the YAML change, writes no plugin
        python3 build.py --write  also writes dist/, round-trips it and checks the result
 Needs the toolkit's tools/spriggit-cli.sh (SKYRIM_TOOLKIT overrides its path) and inputs/ (see README.md).
@@ -16,12 +22,13 @@ HERE = pathlib.Path(__file__).resolve().parent
 INPUTS, BUILD, DIST = HERE / 'inputs', HERE / 'build', HERE / 'dist'
 TOOLKIT = pathlib.Path(os.environ.get('SKYRIM_TOOLKIT', '/Volumes/S512/Projects/ETC/skyrim-ai-toolkit'))
 NAME = 'Beyond Skyrim - Bruma 2 - Child Clothing Fix'
-DESC = 'Binds the child clothing gift items that Beyond Skyrim - Bruma 2.0.0 leaves unset on CYRMaintenance.'
+DESC = 'Binds the child clothing gift items and the Ayleid friend faction that Beyond Skyrim - Bruma 2.0.0 leaves unset on CYRMaintenance.'
 QUEST = 'Quests/CYRMaintenance - 001961_BSHeartland.esm.yaml'
 
 # childClothing order in the 2.0.0 plugin: Blue 1BD173, Purple 1F1541, Turquoise 1BD172
 MALE = ['1D99E9', '1D99E8', '1D99EA']    # CYRClothesChild{Blue,Purple,Turquoise}Male
 FEMALE = ['1D99E7', '1D99E6', '1D99E5']  # CYRClothesChild{Blue,Purple,Turquoise}Female
+FRIEND = '0B555D'                        # CYRAyleidUndeadFriendFaction
 
 
 def lst(name, ids):
@@ -48,7 +55,12 @@ def edited(text):
     old_f = '    - MutagenObjectType: ScriptProperty\n      Name: ChildFemaleMiscs\n'
     old_m = '    - MutagenObjectType: ScriptProperty\n      Name: ChildMaleMiscs\n'
     assert text.count(old_f) == 1 and text.count(old_m) == 1, 'the quest no longer has the two empty properties'
-    return text.replace(old_f, lst('ChildFemaleMiscs', FEMALE)).replace(old_m, lst('ChildMaleMiscs', MALE))
+    text = text.replace(old_f, lst('ChildFemaleMiscs', FEMALE)).replace(old_m, lst('ChildMaleMiscs', MALE))
+    anchor = ('    - MutagenObjectType: ScriptObjectProperty\n      Name: CYRAyleidUndeadFaction\n'
+              '      Object: 0B555A:BSHeartland.esm\n')
+    assert text.count(anchor) == 1 and 'Name: CYRAyleidUndeadFriendFaction' not in text, 'the quest already has the faction or lost its anchor'
+    return text.replace(anchor, anchor + '    - MutagenObjectType: ScriptObjectProperty\n      Name: CYRAyleidUndeadFriendFaction\n'
+                        f'      Object: {FRIEND}:BSHeartland.esm\n')
 
 
 def main():

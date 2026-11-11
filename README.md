@@ -1,6 +1,6 @@
 # Beyond Skyrim - Bruma 2 - Child Clothing Fix
 
-Private release (v0.1.1), tested on a new game. One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
+Private release (v0.1.1 published; v0.1.2 built, not yet released). One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
 Skyrim - Bruma 2.0.0 (Nexus 10917).
 
 ## Requirements
@@ -23,6 +23,11 @@ shows `Cannot access an element of a None array` three times and `RegisterChildO
 registered with `BSKAdoptionScript` (Assets SE) and its Bring Your Own Hearthfire gift lists. Version 1.6.4 has no such
 feature (43 properties on the script, none of these).
 
+A second property of the same quest is never set: `CYRMaintenanceScript.CYRAyleidUndeadFriendFaction`, although the
+faction exists (`CYRAyleidUndeadFriendFaction`, `0B555D:BSHeartland.esm`, which already lists the Bruma Ayleid factions and
+`BSKRatFaction` as friends). `SetupFactionRelationships()` calls `BSKRatFaction.SetAlly(CYRAyleidUndeadFriendFaction, ...)`,
+so every new game logs `Cannot be an ally of a None faction` and the rat faction is never made an ally of it.
+
 ## Change
 
 The two arrays are bound to the gift items of the same colour, in the order of `childClothing`:
@@ -32,6 +37,8 @@ The two arrays are bound to the gift items of the same colour, in the order of `
 | `CYRClothesChildBlue` (`1BD173`) | `CYRClothesChildBlueMale` (`1D99E9`) | `CYRClothesChildBlueFemale` (`1D99E7`) |
 | `CYRClothesChildPurple` (`1F1541`) | `CYRClothesChildPurpleMale` (`1D99E8`) | `CYRClothesChildPurpleFemale` (`1D99E6`) |
 | `CYRClothesChildTurquoise` (`1BD172`) | `CYRClothesChildTurquoiseMale` (`1D99EA`) | `CYRClothesChildTurquoiseFemale` (`1D99E5`) |
+
+`CYRAyleidUndeadFriendFaction` is bound to `0B555D:BSHeartland.esm` (the faction of that name).
 
 The pairing by colour and gender is an inference: the author left the arrays empty. Nothing else in the quest changes
 (`build/review.diff` after a build).
@@ -44,9 +51,13 @@ gift items; `CYRStatsQuest` (1607CADF) is running and `SurvivalModeInitialized` 
 `Cannot access an element of a None array` line from `CYRMaintenanceScript` (the one None-array line in that session is
 `PSDI_ScriptMcm`). Before the fix a loaded save shows both arrays as `[]`.
 
-Separate and not fixed here: `Init()` still logs `Cannot be an ally of a None faction` in `SetupFactionRelationships()`
-(`Faction.SetAlly` on `BSKRatFaction` 14072336). `sqv` shows three more unbound `CYRMaintenanceScript` properties in 2.0.0:
-`CYRAyleidUndeadFriendFaction`, `CYRCrowsWoodWorld`, `CYRLeyawiinRepublicGold001`.
+The faction binding (v0.1.2) is built and verified in the plugin bytes (property `CYRAyleidUndeadFriendFaction` ->
+`050B555D`) but not yet tested in a new game: expected result is no `Cannot be an ally of a None faction` line and
+`sqv CYRMaintenance` showing the faction bound.
+
+Left unset on purpose, because nothing exists to bind: `CYRCrowsWoodWorld` and `CYRTestWorld` (no worldspace record;
+`SetupFormlists()` calls `AddForm(None)` on them) and `CYRLeyawiinRepublicGold001` (no record; `SetupCurrencyConversion()`
+tests it for None first).
 
 ## Limits
 
