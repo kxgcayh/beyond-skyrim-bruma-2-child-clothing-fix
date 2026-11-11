@@ -1,10 +1,10 @@
-name = "Bruma-2-Child-Clothing-Fix"
-display_name = "Bruma 2 Child Clothing Fix"
-version = "0.1.0"
+name = "Beyond-Skyrim-Bruma-2-Child-Clothing-Fix"
+display_name = "Beyond Skyrim - Bruma 2 - Child Clothing Fix"
+version = "0.1.1"
 description = "Binds the child clothing gift items that Beyond Skyrim - Bruma 2.0.0 leaves unset on CYRMaintenance. Tested on a new game; Init() completion unverified. Private use."
 
 [files]
-"Bruma 2 - Child Clothing Fix.esp" = "dist/Bruma 2 - Child Clothing Fix.esp"
+"Beyond Skyrim - Bruma 2 - Child Clothing Fix.esp" = "dist/Beyond Skyrim - Bruma 2 - Child Clothing Fix.esp"
 "THIRD-PARTY-NOTICES.txt" = "THIRD-PARTY-NOTICES.txt"
 
 [nexus]
@@ -14,4 +14,4 @@ category = "optional"
 mod_category = 84
 
 [github]
-repo = "kxgcayh/bruma-2-child-clothing-fix"
+repo = "kxgcayh/beyond-skyrim-bruma-2-child-clothing-fix"

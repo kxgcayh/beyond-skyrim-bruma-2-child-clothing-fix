@@ -1,4 +1,4 @@
-Bruma 2 Child Clothing Fix: third-party material
+Beyond Skyrim - Bruma 2 - Child Clothing Fix: third-party material
 
 The plugin overrides one quest record of Beyond Skyrim - Bruma (Nexus Mods 10917, by The Beyond Skyrim - Cyrodiil
 Development Team) and copies that record's data with two properties filled in. No licence is granted for it. It is shared

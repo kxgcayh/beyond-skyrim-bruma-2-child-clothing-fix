@@ -1,4 +1,4 @@
-# Bruma 2 Child Clothing Fix
+# Beyond Skyrim - Bruma 2 - Child Clothing Fix
 
 Private pre-release (v0.1.0). One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
 Skyrim - Bruma 2.0.0 (Nexus 10917).
@@ -50,5 +50,5 @@ completion are not verified (DevBench was down).
 
 ## Install
 
-Copy `dist/Bruma 2 - Child Clothing Fix.esp` into a mod of its own in MO2, for example `Bruma 2 Child Clothing Fix`. The
+Copy `dist/Beyond Skyrim - Bruma 2 - Child Clothing Fix.esp` into a mod of its own in MO2, for example `Beyond Skyrim - Bruma 2 - Child Clothing Fix`. The
 plugin masters `BSHeartland.esm`, so LOOT sorts it after Bruma. It is ESL-flagged (it adds no new record).

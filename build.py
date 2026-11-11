@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build "Bruma 2 - Child Clothing Fix.esp".
+"""Build "Beyond Skyrim - Bruma 2 - Child Clothing Fix.esp".
 
 Beyond Skyrim - Bruma 2.0.0 binds CYRMaintenanceScript.ChildMaleMiscs and .ChildFemaleMiscs (MiscObject[]) on the quest
 CYRMaintenance (001961:BSHeartland.esm) as None. SetupChildClothing() then fails with "Cannot access an element of a None
@@ -15,7 +15,7 @@ import difflib, hashlib, os, pathlib, re, shutil, struct, subprocess, sys
 HERE = pathlib.Path(__file__).resolve().parent
 INPUTS, BUILD, DIST = HERE / 'inputs', HERE / 'build', HERE / 'dist'
 TOOLKIT = pathlib.Path(os.environ.get('SKYRIM_TOOLKIT', '/Volumes/S512/Projects/ETC/skyrim-ai-toolkit'))
-NAME = 'Bruma 2 - Child Clothing Fix'
+NAME = 'Beyond Skyrim - Bruma 2 - Child Clothing Fix'
 DESC = 'Binds the child clothing gift items that Beyond Skyrim - Bruma 2.0.0 leaves unset on CYRMaintenance.'
 QUEST = 'Quests/CYRMaintenance - 001961_BSHeartland.esm.yaml'
 
