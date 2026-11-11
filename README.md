@@ -1,6 +1,6 @@
 # Beyond Skyrim - Bruma 2 - Child Clothing Fix
 
-Private release (v0.1.1 published; v0.1.2 built, not yet released). One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
+Private release (v0.1.1 published; v0.1.2 built and tested, not yet released). One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
 Skyrim - Bruma 2.0.0 (Nexus 10917).
 
 ## Requirements
@@ -45,15 +45,12 @@ The pairing by colour and gender is an inference: the author left the arrays emp
 
 ## Test status
 
-Tested 2026-11-12 on a new game (Bruma 2.0.0, Assets SE) through DevBench. `sqv CYRMaintenance` shows
-`ChildMaleMiscs = [161D99E9, 161D99E8, 161D99EA]` and `ChildFemaleMiscs = [161D99E7, 161D99E6, 161D99E5]`, the intended
-gift items; `CYRStatsQuest` (1607CADF) is running and `SurvivalModeInitialized` is True. `Papyrus.0.log` has no
-`Cannot access an element of a None array` line from `CYRMaintenanceScript` (the one None-array line in that session is
-`PSDI_ScriptMcm`). Before the fix a loaded save shows both arrays as `[]`.
-
-The faction binding (v0.1.2) is built and verified in the plugin bytes (property `CYRAyleidUndeadFriendFaction` ->
-`050B555D`) but not yet tested in a new game: expected result is no `Cannot be an ally of a None faction` line and
-`sqv CYRMaintenance` showing the faction bound.
+Tested 2026-11-12 on a new game (Bruma 2.0.0, Assets SE) through DevBench, v0.1.2. `sqv CYRMaintenance` shows
+`ChildMaleMiscs = [161D99E9, 161D99E8, 161D99EA]`, `ChildFemaleMiscs = [161D99E7, 161D99E6, 161D99E5]` and
+`CYRAyleidUndeadFriendFaction = 160B555D`; `CYRStatsQuest` (1607CADF) is running and `SurvivalModeInitialized` is True.
+`Papyrus.0.log` has no `Cannot be an ally of a None faction` line and no `CYRMaintenanceScript` stack frame at all. The
+`Cannot access an element of a None array` lines in that session come from SkyUI favourites and `PSDI_ScriptMcm`.
+Before the fixes a loaded save shows both Misc arrays as `[]`, and the faction property as unset.
 
 Left unset on purpose, because nothing exists to bind: `CYRCrowsWoodWorld` and `CYRTestWorld` (no worldspace record;
 `SetupFormlists()` calls `AddForm(None)` on them) and `CYRLeyawiinRepublicGold001` (no record; `SetupCurrencyConversion()`
