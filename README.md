@@ -1,6 +1,6 @@
 # Beyond Skyrim - Bruma 2 - Child Clothing Fix
 
-Private release (v0.1.1). One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
+Private release (v0.1.1), untested on a new game. One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
 Skyrim - Bruma 2.0.0 (Nexus 10917).
 
 ## Requirements
@@ -38,9 +38,11 @@ The pairing by colour and gender is an inference: the author left the arrays emp
 
 ## Test status
 
-Tested 2026-11-12 on a new game (Bruma 2.0.0, Assets SE): the 3 `Cannot access an element of a None array` lines are
-gone and no new CYR or Bruma errors appeared in `Papyrus.0.log`. `CYRStatsQuest` `IsRunning` and full `Init()`
-completion are not verified (DevBench was down).
+NOT yet tested on a new game. The fix only takes effect when `CYRMaintenanceScript.Init()` runs, at new-game start; a
+loaded save keeps the property values it stored. A 2026-11-12 check on loaded saves (both `Papyrus.N.log` sessions show
+"loaded from save" lines) proved nothing either way. On that save `CYRStatsQuest` (1607CADF) is running and
+`SurvivalModeInitialized` is True, and `ChildMaleMiscs` / `ChildFemaleMiscs` print as `[]` in `sqv`, which is expected
+for a save that predates the fix. Pending: a new game with this plugin, then `quest 0x1607CADF` and `sqv CYRMaintenance`.
 
 ## Limits
 
