@@ -1,6 +1,6 @@
 # Bruma 2 Child Clothing Fix
 
-Local and private, never published. One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
+Private pre-release (v0.1.0). One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
 Skyrim - Bruma 2.0.0 (Nexus 10917).
 
 ## Problem
@@ -23,6 +23,12 @@ The two arrays are bound to the gift items of the same colour, in the order of `
 
 The pairing by colour and gender is an inference: the author left the arrays empty. Nothing else in the quest changes
 (`build/review.diff` after a build).
+
+## Test status
+
+Tested 2026-11-12 on a new game (Bruma 2.0.0, Assets SE): the 3 `Cannot access an element of a None array` lines are
+gone and no new CYR or Bruma errors appeared in `Papyrus.0.log`. `CYRStatsQuest` `IsRunning` and full `Init()`
+completion are not verified (DevBench was down).
 
 ## Limits
 
