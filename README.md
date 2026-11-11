@@ -1,7 +1,19 @@
 # Beyond Skyrim - Bruma 2 - Child Clothing Fix
 
-Private pre-release (v0.1.0). One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
+Private release (v0.1.1). One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
 Skyrim - Bruma 2.0.0 (Nexus 10917).
+
+## Requirements
+
+| Required | Source | Why |
+|---|---|---|
+| Beyond Skyrim - Bruma SE 2.0.0 | Nexus 10917 (`BSHeartland.esm`) | the plugin overrides its quest `CYRMaintenance`; 1.6.4 has no such properties, so it does not apply |
+| Beyond Skyrim - Assets SE | Nexus 198585 (`BSAssets.esm`) | master of `BSHeartland.esm` 2.0.0; the copied record references it, and `BSKAdoptionScript` lives there |
+| Skyrim.esm, Update.esm, Dragonborn.esm, HearthFires.esm | base game and DLC | the record's other masters |
+
+Masters in the plugin header: `Skyrim.esm`, `Update.esm`, `HearthFires.esm`, `Dragonborn.esm`, `BSAssets.esm`,
+`BSHeartland.esm`. Tested only with Bruma 2.0.0 and Assets SE 2026.11.11. Not for new content from Bruma updates that
+change `CYRMaintenance`: the plugin copies the 2.0.0 record, so a later Bruma change to that quest would be overridden.
 
 ## Problem
 
