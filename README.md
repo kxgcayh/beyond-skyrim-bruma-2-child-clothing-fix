@@ -1,6 +1,6 @@
 # Beyond Skyrim - Bruma 2 - Child Clothing Fix
 
-Private release (v0.1.1), untested on a new game. One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
+Private release (v0.1.1), tested on a new game. One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
 Skyrim - Bruma 2.0.0 (Nexus 10917).
 
 ## Requirements
@@ -38,11 +38,15 @@ The pairing by colour and gender is an inference: the author left the arrays emp
 
 ## Test status
 
-NOT yet tested on a new game. The fix only takes effect when `CYRMaintenanceScript.Init()` runs, at new-game start; a
-loaded save keeps the property values it stored. A 2026-11-12 check on loaded saves (both `Papyrus.N.log` sessions show
-"loaded from save" lines) proved nothing either way. On that save `CYRStatsQuest` (1607CADF) is running and
-`SurvivalModeInitialized` is True, and `ChildMaleMiscs` / `ChildFemaleMiscs` print as `[]` in `sqv`, which is expected
-for a save that predates the fix. Pending: a new game with this plugin, then `quest 0x1607CADF` and `sqv CYRMaintenance`.
+Tested 2026-11-12 on a new game (Bruma 2.0.0, Assets SE) through DevBench. `sqv CYRMaintenance` shows
+`ChildMaleMiscs = [161D99E9, 161D99E8, 161D99EA]` and `ChildFemaleMiscs = [161D99E7, 161D99E6, 161D99E5]`, the intended
+gift items; `CYRStatsQuest` (1607CADF) is running and `SurvivalModeInitialized` is True. `Papyrus.0.log` has no
+`Cannot access an element of a None array` line from `CYRMaintenanceScript` (the one None-array line in that session is
+`PSDI_ScriptMcm`). Before the fix a loaded save shows both arrays as `[]`.
+
+Separate and not fixed here: `Init()` still logs `Cannot be an ally of a None faction` in `SetupFactionRelationships()`
+(`Faction.SetAlly` on `BSKRatFaction` 14072336). `sqv` shows three more unbound `CYRMaintenanceScript` properties in 2.0.0:
+`CYRAyleidUndeadFriendFaction`, `CYRCrowsWoodWorld`, `CYRLeyawiinRepublicGold001`.
 
 ## Limits
 
