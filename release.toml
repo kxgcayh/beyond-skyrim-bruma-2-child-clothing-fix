@@ -1,6 +1,6 @@
 name = "Beyond-Skyrim-Bruma-2-Child-Clothing-Fix"
 display_name = "Beyond Skyrim - Bruma 2 - Child Clothing Fix"
-version = "0.1.2"
+version = "0.1.3"
 description = "Binds the child clothing gift items and the Ayleid friend faction that Beyond Skyrim - Bruma 2.0.0 leaves unset on CYRMaintenance. Tested on a new game."
 
 [files]

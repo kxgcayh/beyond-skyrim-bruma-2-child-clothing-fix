@@ -1,6 +1,6 @@
 # Beyond Skyrim - Bruma 2 - Child Clothing Fix
 
-Release v0.1.2 (published 2026-11-12; v0.1.0 and v0.1.1 are older releases). One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
+Release v0.1.3 (published 2026-11-13: notice and metadata text only; the plugin is byte-identical to v0.1.2, published 2026-11-12). One override of the quest `CYRMaintenance` (`001961:BSHeartland.esm`) for Beyond
 Skyrim - Bruma 2.0.0 (Nexus 10917).
 
 ## Requirements
