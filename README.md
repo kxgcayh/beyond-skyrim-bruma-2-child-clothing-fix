@@ -78,3 +78,14 @@ tests it for None first).
 
 Copy `dist/Beyond Skyrim - Bruma 2 - Child Clothing Fix.esp` into a mod of its own in MO2, for example `Beyond Skyrim - Bruma 2 - Child Clothing Fix`. The
 plugin masters `BSHeartland.esm`, so LOOT sorts it after Bruma. It is ESL-flagged (it adds no new record).
+
+## Credits and Permissions
+
+Checked on 2026-11-13 against each mod's Nexus permission block and author notes, not its description or readme. The plugin is derived from the mods below and stays under their authors' terms.
+
+| Mod | Author | What the Nexus page says | Status |
+|---|---|---|---|
+| [Beyond Skyrim - Bruma SE](https://www.nexusmods.com/skyrimspecialedition/mods/10917) | The Beyond Skyrim - Cyrodiil Development Team | No permission block. Author notes: addons and compatibility patches may be distributed, and fixes should be shared with the team first; the full mod and resources made for Beyond Skyrim may not be redistributed. | allowed |
+| [Beyond Skyrim - Assets SE](https://www.nexusmods.com/skyrimspecialedition/mods/198585) | BeyondSkyrimDC | No permission block. Author notes: as Beyond Skyrim - Bruma SE (compatibility patches allowed; the full mod and its resources may not be redistributed). | allowed |
+
+Every source allows a patch like this with credit; credit the authors above when publishing. Beyond Skyrim asks that fixes be shared with its team first.
