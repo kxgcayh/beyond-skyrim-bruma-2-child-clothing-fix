@@ -14,13 +14,24 @@ tests it for None) are left unset on purpose.
 
 Usage: python3 build.py          dry run: serializes inputs/BSHeartland.esm, prints the YAML change, writes no plugin
        python3 build.py --write  also writes dist/, round-trips it and checks the result
-Needs the toolkit's tools/spriggit-cli.sh (SKYRIM_TOOLKIT overrides its path) and inputs/ (see README.md).
+Needs the toolkit's tools/spriggit-cli.sh (SKYRIM_TOOLKIT, or a skyrim-agents-toolkit clone next to this repo or a parent folder) and inputs/ (see README.md).
 """
 import difflib, hashlib, os, pathlib, re, shutil, struct, subprocess, sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 INPUTS, BUILD, DIST = HERE / 'inputs', HERE / 'build', HERE / 'dist'
-TOOLKIT = pathlib.Path(os.environ.get('SKYRIM_TOOLKIT', '/Volumes/S512/Projects/ETC/skyrim-ai-toolkit'))
+TOOLKIT_REPO = 'https://github.com/kxgcayh/skyrim-agents-toolkit'
+
+
+def find_toolkit():
+    """SKYRIM_TOOLKIT if set, else a skyrim-agents-toolkit or skyrim-ai-toolkit folder next to this repo or a parent folder."""
+    if os.environ.get('SKYRIM_TOOLKIT'):
+        return pathlib.Path(os.environ['SKYRIM_TOOLKIT'])
+    for folder in pathlib.Path(__file__).resolve().parents:
+        for name in ('skyrim-agents-toolkit', 'skyrim-ai-toolkit'):
+            if (folder / name / 'tools').is_dir():
+                return folder / name
+    sys.exit(f'Skyrim AI toolkit not found: clone {TOOLKIT_REPO} next to this repo or set SKYRIM_TOOLKIT.')
 NAME = 'Beyond Skyrim - Bruma 2 - Child Clothing Fix'
 DESC = 'Binds the child clothing gift items and the Ayleid friend faction that Beyond Skyrim - Bruma 2.0.0 leaves unset on CYRMaintenance.'
 QUEST = 'Quests/CYRMaintenance - 001961_BSHeartland.esm.yaml'
@@ -38,7 +49,7 @@ def lst(name, ids):
 
 
 def run(*cmd):
-    r = subprocess.run(['bash', str(TOOLKIT / 'tools/spriggit-cli.sh'), *cmd], capture_output=True, text=True)
+    r = subprocess.run(['bash', str(find_toolkit() / 'tools/spriggit-cli.sh'), *cmd], capture_output=True, text=True)
     if r.returncode:
         sys.exit(r.stdout[-1500:] + r.stderr[-1500:])
 

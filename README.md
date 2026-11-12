@@ -71,8 +71,8 @@ tests it for None first).
     python3 build.py          # dry run: serializes inputs/BSHeartland.esm (once, about 256 MB in build/), prints the change
     python3 build.py --write  # writes dist/, round-trips it, checks header, masters and the YAML
 
-`inputs/BSHeartland.esm` is Bruma 2.0.0's plugin, pinned by `inputs.sha256`, not committed. Needs the Skyrim AI toolkit's
-`tools/spriggit-cli.sh` (`SKYRIM_TOOLKIT` overrides its path).
+`inputs/BSHeartland.esm` is Bruma 2.0.0's plugin, pinned by `inputs.sha256`, not committed. Needs `tools/spriggit-cli.sh` from the [Skyrim AI toolkit](https://github.com/kxgcayh/skyrim-agents-toolkit): clone it next to this repo
+(or next to a parent folder), or set `SKYRIM_TOOLKIT` to its folder.
 
 ## Install
 
